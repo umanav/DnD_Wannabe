@@ -9,7 +9,19 @@ def index(request):
     return redirect("/profile")
 
 def register(request):
-    return render(request, "DnD_app/profile.html")
+    result = User.objects.validate_reg(request.POST)
+    if result[0]:
+        request.session['user_id'] = result[1].id
+        request.session['user_name'] = result[1].name
+        request.session['email'] = result[1].email
+        return redirect("DnD_app/profile"))
+    else:
+        for error in result[1]: 
+            messages.add_message(request, messages.INFO, error)
+    return redirect(request, "/DnD_app/index")
+
+def profile(request):
+    return render(request.'DnD_app/profile.hhml/)
 
 def login(request):
     errors = User.objects.valid_login(request.POST)
