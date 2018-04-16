@@ -12,7 +12,15 @@ def register(request):
     return render(request, "DnD_app/profile.html")
 
 def login(request):
-    return render(request, "DnD_app/profile.html")
+    errors = User.objects.valid_login(request.POST)
+    if errors:
+        for error in errors:
+            messages.error(request,error)
+        return redirect ('/')
+    else:
+        request.session['user'] = User.objects.get(username=request.POST['username']).username
+        request.session['id'] = User.objects.get(username=request.POST['username']).id
+        return redirect ('/profile')
 
 def new_Game(request):
     return render(request, "DnD_app/character.html")
