@@ -11,7 +11,6 @@
     </head>
     <body>
         <h1>Welcome, {{ user.username }}</h1>
-        <!-- <image>{{ image from the character.html }}</image> -->
         <table>
             <thead>
                 <tr>
@@ -41,9 +40,9 @@
             </tbody>
         </table>
         <!-- When the user has registered, but hasn't played yet -->
-        <button type="button" href='/new_Game'>New Game</button> 
+        <a href="/new_Game"><button type="button">New Game</button> </a>
         <!-- For users that have played before -->
-        <button type="button" href='/restart'>Start a New Game</button>
-        <button type="button" href='/continue'>Continue with Current Game</button>
+        <a href='/restart'><button type="button">Start a New Game</button> </a>
+        <a href='/continue'><button type="button">Continue with Current Game</button> </a>
     </body>
 </html>

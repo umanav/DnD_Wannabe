@@ -1,0 +1,27 @@
+#register, #login{
+    display: inline-block;
+    border: 2px solid black;
+    margin: 10px;
+    vertical-align: middle;
+    padding: 10px;
+}
+label{
+    display: block;
+    margin: 10px;
+}
+input{
+    float: right;
+}
+ul{
+    margin-left: 100px;
+}
+#welcome{
+    display: inline-block;
+}
+#top{
+    height: 10px;
+}
+#recent, #other {
+    display: inline-block;
+    width: auto;
+}
