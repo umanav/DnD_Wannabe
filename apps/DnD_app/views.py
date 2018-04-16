@@ -1,7 +1,12 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
+from models import *
+
 def index(request):
-    return render(request, "DnD_app/index.html")
+    if 'id' not in request.session:
+        return render(request, "DnD_app/index.html")
+    return redirect("/profile")
 
 def register(request):
     return render(request, "DnD_app/profile.html")
