@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Player's Profile</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
+        <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <h1>Welcome, {{ user.username }}</h1>
+        <!-- <image>{{ image from the character.html }}</image> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature </th>
+                    <th>Value </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>Gold: </td>
+                    <td>{{ game.gold }}</td>
+                </tr>
+                <tr>
+                    <td>Level: </td>
+                    <td>{{ game.level }}</td>
+                </tr>
+                <tr>
+                    <td>Hit Points: </td>
+                    <td>{{ game.hitpoints }}</td>
+                </tr>
+                <tr>
+                    <td>Achievements: </td>
+                    <!-- <td> Here it will show the levels passed. This is optional</td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- When the user has registered, but hasn't played yet -->
+        <button type="button" href='/new_Game'>New Game</button> 
+        <!-- For users that have played before -->
+        <button type="button" href='/restart'>Start a New Game</button>
+        <button type="button" href='/continue'>Continue with Current Game</button>
+    </body>
+</html>
