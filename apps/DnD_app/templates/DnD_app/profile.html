@@ -10,12 +10,14 @@
         <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
     </head>
     <body>
-        <h1>Welcome, {{ user.username }}</h1>
+        <h1>Welcome, {{ request.session.user_name }}</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Feature </th>
-                    <th>Value </th>
+                    <th>Player Gold </th>
+                    <th>Player Level </th>
+                    <th>Player HP </th>
+                    <th>Player Achievements </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,10 +41,14 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% if 'level' in request.session %}
+            <a href='/restart'><button type="button">Start a New Game</button> </a>
+            <a href='/game'><button type="button">Continue with Current Game</button> </a>
+        {% else %}
+            <a href="/new_Game"><button type="button">New Game</button> </a>
+        {% endif %}
         <!-- When the user has registered, but hasn't played yet -->
-        <a href="/new_Game"><button type="button">New Game</button> </a>
         <!-- For users that have played before -->
-        <a href='/restart'><button type="button">Start a New Game</button> </a>
-        <a href='/game'><button type="button">Continue with Current Game</button> </a>
+        <a href='/logout'><button type="button">Logout</button> </a>
     </body>
 </html>

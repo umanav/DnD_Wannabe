@@ -16,12 +16,12 @@
                 <h2>Register:</h2>
                 <form class="form" action="/register" method="post">
                     {% csrf_token %}
-                    <label for="first_name">Name: <input type="text" name="name" id="name"></label>
-                    <label for="last_name">Name: <input type="text" name="name" id="name"></label>
-                    <label for="username">Username: <input type="text" name="username" id="username"></label>
-                    <label for="email">Name: <input type="email" name="email" id="email"></label>
-                    <label for="password">Password: <input type="password" name="password" id="password"></label>
-                    <label for="pwd_confirm">Password Confirmation: <input type="password" name="pwd_confirm" id="pwd_confirm"></label>
+                    <label for="first_name">First Name: <input type="text" name="first_name"></label>
+                    <label for="last_name">Last Name: <input type="text" name="last_name"></label>
+                    <label for="username">Username: <input type="text" name="username"></label>
+                    <label for="email">email: <input type="email" name="email" ></label>
+                    <label for="password">Password: <input type="password" name="password"></label>
+                    <label for="pwd_confirm">Password Confirmation: <input type="password" name="pwd_confirm"></label>
                     <input type="submit" value="Register">
                 </form>
             </div>
@@ -29,8 +29,8 @@
                 <h2>Log In:</h2>
                 <form class="form" action="/login" method="post">
                     {% csrf_token %}
-                    <label for="username">Username: <input type="username" name="username" id="username"></label>
-                    <label for="password">Password: <input type="password" name="password" id="password"></label>
+                    <label for="username">Username: <input type="username" name="username"></label>
+                    <label for="password">Password: <input type="password" name="password"></label>
                     <input type="submit" value="Log In">
                 </form>
             </div>
