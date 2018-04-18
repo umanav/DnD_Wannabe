@@ -94,6 +94,7 @@ class Character(models.Model):
     user = models.ManyToManyField(User, related_name = 'Characters')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    image_route = models.CharField(max_length=255, default="img", null=True, blank=True)
 
 class Game(models.Model):
     user = models.ForeignKey(User, related_name = 'User')

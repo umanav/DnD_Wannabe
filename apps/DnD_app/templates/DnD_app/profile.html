@@ -11,37 +11,26 @@
     </head>
     <body>
         <h1>Welcome, {{ request.session.user_name }}</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Player Gold </th>
-                    <th>Player Level </th>
-                    <th>Player HP </th>
-                    <th>Player Achievements </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>Gold: </td>
-                    <td>{{ game.gold }}</td>
-                </tr>
-                <tr>
-                    <td>Level: </td>
-                    <td>{{ game.level }}</td>
-                </tr>
-                <tr>
-                    <td>Hit Points: </td>
-                    <td>{{ game.hitpoints }}</td>
-                </tr>
-                <tr>
-                    <td>Achievements: </td>
-                    <!-- <td> Here it will show the levels passed. This is optional</td> -->
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
         {% if 'level' in request.session %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player Gold </th>
+                        <th>Player Level </th>
+                        <th>Player HP </th>
+                        <th>Player Achievements </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{request.session.gold}}</td>
+                        <td>{{request.session.level}}</td>
+                        <td>{{request.session.hp}}</td>
+                        <td>Achievements: </td>
+                        <!-- <td> Here it will show the levels passed. This is optional</td> -->
+                    </tr>
+                </tbody>
+            </table>
             <a href='/restart'><button type="button">Start a New Game</button> </a>
             <a href='/game'><button type="button">Continue with Current Game</button> </a>
         {% else %}

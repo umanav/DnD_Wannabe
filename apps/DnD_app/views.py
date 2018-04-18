@@ -44,7 +44,6 @@ def new_Game(request):
 
 def save(request):
     active = Game.objects.active_game(request.session['id'])
-    print active
     if active[0] == False:
         user= User.objects.get(id=request.session['id'])
         game= Game.objects.create(user = user, hp = request.session['hp'], gold=request.session['gold'], level=request.session['level'])
@@ -57,9 +56,10 @@ def save(request):
     return redirect('/profile')
 
 def restart(request):
+    del request.session['gold']
+    del request.session['hp']
     del request.session['level']
     current = Game.objects.get(user_id=request.session['id'])
-    print current
     current.delete()
     return redirect ('/new_Game')
 
