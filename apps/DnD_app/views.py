@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-import random
 from models import *
+from random import *
 
 def index(request):
     if 'id' not in request.session:
@@ -82,3 +82,17 @@ def game(request):
     character= game.character
     return render(request, "DnD_app/game.html", {'character':character})
 
+def first (request):
+    dice = randint (1, 20)
+    game = Game.objects.get(user=request.session['id'])
+    if game.character.id == 1:
+        dice +=4
+    if dice >= 14:
+        request.session['level']+=1
+        request.session['gold']+=(dice-9)
+        return redirect ('/game')
+    else:
+        request.session['hp'] -= (20-dice)
+        if request.session['hp'] >= 0:
+            return redirect ('/game_over')
+        return redirect ('/game')
