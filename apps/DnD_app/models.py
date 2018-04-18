@@ -98,10 +98,18 @@ class Character(models.Model):
 
 class Game(models.Model):
     user = models.ForeignKey(User, related_name = 'User')
-    character = models.ForeignKey(Character, related_name = 'character')
+    character = models.ForeignKey(Character, related_name = 'character', null=True, blank=True)
     hp = models.IntegerField()
     gold = models.IntegerField()
     level = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = GameManager()
+
+class Story(models.Model):
+    story = models.TextField()
+    ninja_pref = models.CharField(max_length=255)
+    monk_pref = models.CharField(max_length = 255)
+    no_act = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
