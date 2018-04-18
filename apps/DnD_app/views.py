@@ -66,14 +66,14 @@ def restart(request):
 def keep_playing(request):
     return render(request, "DnD_app/game.html")
 
-# def new_game(request, id):
-#     character = Character.objects.get(id=id)
-#     request.session['hp'] = character.hp
-#     request.session['gold'] = character.gold
-#     request.session['level'] = 1
-#     return render(request, "DnD_app/game.html")
+def new_game(request, id):
+    character = Character.objects.get(id=id)
+    request.session['hp'] = character.hp
+    request.session['gold'] = character.gold
+    request.session['level'] = 1
+    return render(request, "DnD_app/game.html")
 
-def game(request):
+def game(request,id):
     game = Game.objects.get(id=id)
     game.hp = request.session['hp']
     game.gold = request.session['gold']
