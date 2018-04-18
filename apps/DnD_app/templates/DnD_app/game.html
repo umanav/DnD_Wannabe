@@ -21,15 +21,21 @@
     </div>
     <br>
     <div>
-         <p></p>
+         <p>{{story.story}}</p>
          <table>
              <tbody>
-                 <tr>
-                     <td>{{Story.ninja_pref}}</td>
-                 </tr>
+                <tr>
+                     <td>{{story.ninja_pref}}</td>
+                     <td>{{story.monk_pref}}</td>
+                     <td>{{story.no_act}}</td>
+                </tr>
+                <tr>
+                    <td><a href="/first"><button>Roll the Dice</button></a></td>
+                    <td><a href="/second"><button>Roll the Dice</button></a></td>
+                    <td><a href="/third"><button>Roll the Dice</button></a></td>
+                </tr>
              </tbody>
          </table>
-         <p><a href="/first"><button>Option 1</button></a>   <a href="/second"><button>Option 2</button></a>   <a href="/third"><button>Option 3</button></a></p>
     </div>
     <!-- <a type='submit' href="/Game_Over"><button>Select</button></a>
     <a type='submit' href="/keep_on_winning"><button>Select</button></a> -->
