@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+import random
 from models import *
 
 def index(request):
@@ -38,7 +39,7 @@ def logout(request):
     del request.session['id']
     return redirect('/')
 
-def new_Game(request):
+def character(request):
     characters = Character.objects.all()
     return render(request, "DnD_app/character.html",{'characters':characters})
 
@@ -59,16 +60,23 @@ def restart(request):
     del request.session['gold']
     del request.session['hp']
     del request.session['level']
-    current = Game.objects.get(user_id=request.session['id'])
-    current.delete()
+
     return redirect ('/new_Game')
 
 def keep_playing(request):
     return render(request, "DnD_app/game.html")
 
-def game(request, id):
-    character = Character.objects.get(id=id)
-    request.session['hp'] = character.hp
-    request.session['gold'] = character.gold
-    request.session['level'] = 1
+# def new_game(request, id):
+#     character = Character.objects.get(id=id)
+#     request.session['hp'] = character.hp
+#     request.session['gold'] = character.gold
+#     request.session['level'] = 1
+#     return render(request, "DnD_app/game.html")
+
+def game(request):
+    game = Game.objects.get(id=id)
+    game.hp = request.session['hp']
+    game.gold = request.session['gold']
+    game.level = request.session['level']
     return render(request, "DnD_app/game.html")
+

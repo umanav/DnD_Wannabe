@@ -98,6 +98,7 @@ class Character(models.Model):
 
 class Game(models.Model):
     user = models.ForeignKey(User, related_name = 'User')
+    character = models.ForeignKey(Character, related_name = 'character')
     hp = models.IntegerField()
     gold = models.IntegerField()
     level = models.IntegerField()
