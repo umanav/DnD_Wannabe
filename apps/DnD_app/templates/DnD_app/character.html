@@ -10,35 +10,34 @@
     <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-    <h1>Choose your character, {{ user.username }}</h1>
-    <form>
-    {% csrf_token %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Ninja</th>
-                    <th>Monk</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <!-- <td> Ninja image from static </td>
-                    <td> Monk image from static </td> -->
-                </tr>
-                <tr>
-                    <td>Hit Points: 100</td>
-                    <td>Hit Points: 150</td>
-                </tr>
-                <tr>
-                    <td>Gold: 200</td>
-                    <td>Gold: 150</td>
-                </tr>
-                <tr>
-                    <td><a type='submit' href="/game"><button>Select</button></a></td>
-                    <td><a type='submit' href="/game"><button>Select</button></a></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+    <h1>Choose your character, {{ request.session.user_name }}</h1>
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+    <table>
+        {% if characters %}
+            {% for character in characters %}
+                <thead>
+                    <tr>
+                        <th>{{character.name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="{% static character.image_route %}" alt="My image" style="width:200px;height:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>HP : {{character.hp}}</td>
+                    </tr>
+                    <tr>   
+                        <td>Gold: {{character.gold}}</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/game/{{character.id}}"><button>select</button></a></td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        {% endif %}
+    </table>
 </body>
 </html>
+

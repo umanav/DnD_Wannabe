@@ -14,7 +14,6 @@ class UserManager (models.Manager):
         email = postData['email']
         password = postData['password']
         pwd_confirm = postData['pwd_confirm']
-
         if len(first_name) ==0  :
             errors.append ("Your first name is required")
         elif len(first_name) < 3:
@@ -39,9 +38,18 @@ class UserManager (models.Manager):
             errors.append ('This username is already in use. Please log in instead.')
         if password != pwd_confirm:
             errors.append ('The password and password confirmation must match')
-        return errors
+        if errors == []:
+            result = User.objects.filter(username=username)
+            if len(result)>0:
+                errors.append("Username already exists ")
+                return (errors,True)
+            else:
+                password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+                user = User.objects.create(first_name =first_name, last_name = last_name, username =username, email = email, password = password)
+                return (user,False)
+        return (errors,True)
 
-    def valid_login (self,postData):
+    def valid_login(self,postData):
         errors =[]
         username = postData['username']
         password = postData['password']
@@ -60,12 +68,12 @@ class UserManager (models.Manager):
             errors.append ("Invalid username/password combination")
         return errors
 
-class GameManager():
-    def valid_login (self,id):
+class GameManager(models.Manager):
+    def active_game(self,id):
         user = User.objects.get(id=id)
         active_game = Game.objects.filter(user = user)
         if len(active_game) == 0:
-            return (False)
+            return (False,active_game)
         return (True,active_game) 
 
 
@@ -86,6 +94,7 @@ class Character(models.Model):
     user = models.ManyToManyField(User, related_name = 'Characters')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    image_route = models.CharField(max_length=255, default="img", null=True, blank=True)
 
 class Game(models.Model):
     user = models.ForeignKey(User, related_name = 'User')
