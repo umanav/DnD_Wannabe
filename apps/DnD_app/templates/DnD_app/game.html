@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-    <!-- not quite sure how to play what, but I'll win! Buahahahahaha -->
     <div>
         <h1>This is your Quest, {{ request.session.user_name }}</h1>
         <p>Gold : {{request.session.gold}}</p>
         <p>Level : {{request.session.level}}</p>
         <p>HP : {{request.session.hp}}</p>
+        <p>Strength: {{character.strength}}</p>
         <a href="/save/{{character.id}}">Profile</a>
         <a href="/logout">Logout</a>
     </div>
@@ -37,7 +37,5 @@
              </tbody>
          </table>
     </div>
-    <!-- <a type='submit' href="/Game_Over"><button>Select</button></a>
-    <a type='submit' href="/keep_on_winning"><button>Select</button></a> -->
 </body>
 </html>

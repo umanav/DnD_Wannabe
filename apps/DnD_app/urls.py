@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^restart$', views.restart),
     url(r'^continue$', views.keep_playing),
     url(r'^character$', views.character),
+    url(r'^end$', views.end),
+    url(r'^game_over$', views.game_over),
 ]
