@@ -12,4 +12,7 @@ urlpatterns = [
     url(r'^restart$', views.restart),
     url(r'^continue$', views.keep_playing),
     url(r'^character$', views.character),
+    url(r'^first$', views.first),
+    url(r'^second$', views.second),
+    url(r'^third$', views.third),
 ]

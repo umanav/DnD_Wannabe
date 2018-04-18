@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from models import *
 from random import *
+import math
 
 def index(request):
     if 'id' not in request.session:
@@ -91,9 +92,43 @@ def first (request):
     if dice >= 14:
         request.session['level']+=1
         request.session['gold']+=(dice-9)
+        if request.session['level']>6:
+            return redirect ('/end')
         return redirect ('/game')
     else:
         request.session['hp'] -= (20-dice)
-        if request.session['hp'] >= 0:
+        if request.session['hp'] <= 0:
+            return redirect ('/game_over')
+        return redirect ('/game')
+
+def second (request):
+    dice = randint (1, 20)
+    game = Game.objects.get(user=request.session['id'])
+    if game.character.id == 2:
+        dice +=4
+    if dice >= 14:
+        request.session['level']+=1
+        request.session['gold']+=(dice-9)
+        if request.session['level']>6:
+            return redirect ('/end')
+        return redirect ('/game')
+    else:
+        request.session['hp'] -= (20-dice)
+        if request.session['hp'] <= 0:
+            return redirect ('/game_over')
+        return redirect ('/game')
+
+def third (request):
+    dice = randint (1, 20)
+    game = Game.objects.get(user=request.session['id'])
+    if dice >= 14:
+        request.session['level']+=1
+        request.session['gold'] = request.session['gold']+int(math.floor((dice-9)*1.5))
+        if request.session['level']>6:
+            return redirect ('/end')
+        return redirect ('/game')
+    else:
+        request.session['hp'] -= (20-dice)
+        if request.session['hp'] <= 0:
             return redirect ('/game_over')
         return redirect ('/game')
