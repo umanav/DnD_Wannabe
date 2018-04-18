@@ -74,11 +74,12 @@ def new_game(request, id):
     request.session['hp'] = character.hp
     request.session['gold'] = character.gold
     request.session['level'] = 1
-    return render(request, "DnD_app/game.html", {'character':character})
+    story = Story.objects.get(id=request.session['level'])
+    return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
 
 def game(request):
     game = Game.objects.get(user=request.session['id'])
-    print game.character.id
     character= game.character
-    return render(request, "DnD_app/game.html", {'character':character})
+    story = Story.objects.get(id=request.session['level'])
+    return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
 

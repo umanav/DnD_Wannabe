@@ -92,6 +92,7 @@ class Character(models.Model):
     hp = models.IntegerField()
     gold = models.IntegerField()
     user = models.ManyToManyField(User, related_name = 'Characters')
+    strength = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     image_route = models.CharField(max_length=255, default="img", null=True, blank=True)
