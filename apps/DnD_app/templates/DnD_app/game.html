@@ -13,11 +13,36 @@
 <body>
     <div>
         <h1>This is your Quest, {{ request.session.user_name }}</h1>
+<<<<<<< HEAD
         <p>Gold : {{request.session.gold}}</p>
         <p>Level : {{request.session.level}}</p>
         <p>HP : {{request.session.hp}}</p>
         <p>Strength: {{character.strength}}</p>
         <a href="/save/{{character.id}}">Save</a>
+=======
+        <table>
+            <thead>
+                <th colspan="3">Current Stats</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gold</td>
+                    <td>HP</td>
+                    <td>Level</td>
+                </tr>
+                <tr>
+                    <td>{{request.session.gold}}</td>
+                    <td>{{request.session.hp}}</td>
+                    <td>{{request.session.level}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Strength: {{character.strength}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p></p>
+        <a href="/save/{{character.id}}">Profile</a>
+>>>>>>> 774e96bf3d315e74ef12593d291bf1f879920acd
         <a href="/logout">Logout</a>
     </div>
     <br>
