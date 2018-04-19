@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The game itself</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
-    <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
-    <link rel="stylesheet" href="{% static 'DnD_app/css/additional.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
 </head>
 <body>
+<<<<<<< HEAD
     <div>
         <h1>This is your Quest, {{ request.session.user_name }}</h1>
         <table>
@@ -61,6 +61,68 @@
                 {% endif %}
              </tbody>
          </table>
+=======
+    <div class="jumbotron text-center">
+        <div>
+            <h1>This is your Quest, {{ request.session.user_name }}</h1>
+            <div id='image'>
+                <img src="{% static character.image_route %}" alt="Character" style="width:200px;height:300px;"/>
+            </div>
+            <div id='stats'>
+                <table class="table table-hover table-responsive-md" id="table-fixed-1">
+                    <thead>
+                        <th colspan="3">Current Stats</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HP</td>
+                            <td>Level</td>
+                            <td>Gold</td>
+                        </tr>
+                        <tr>
+                            <td>{{request.session.hp}}</td>
+                            <td>{{request.session.level}}</td>
+                            <td>{{request.session.gold}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><p>Strength :  {{character.strength}}</p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><a href="/save/{{character.id}}"><button class="btn btn-dark "> Save </button></a> <a href="/logout"><button class="btn btn-dark">Logout</button></a></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div id='story'>
+            <table class="table table-responsive-md table-fixed">
+                <thead>
+                    <th colspan="3"><p>{{story.story}}</p></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{story.ninja_pref}}</td>
+                        <td>{{story.monk_pref}}</td>
+                        <td>{{story.no_act}}</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/first"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
+                        <td><a href="/second"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
+                        <td><a href="/third"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
+                    </tr>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <script>
+                                alert('{{ message }}');
+                            </script>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+>>>>>>> 324184352e4a3ec75a4935fcbf1afc78e6712339
     </div>
 </body>
 </html>

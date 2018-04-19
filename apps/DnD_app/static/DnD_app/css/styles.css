@@ -25,3 +25,21 @@ ul{
     display: inline-block;
     width: auto;
 }
+#story{
+    padding: 50px;
+}
+#image, #stats{
+    vertical-align: top;
+    display: inline-block; 
+    margin :10px;
+}
+
+#table-fixed-1{
+    width: 700px;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.custom-button {
+
+  }
