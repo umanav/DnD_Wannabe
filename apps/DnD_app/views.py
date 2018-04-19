@@ -98,10 +98,6 @@ def first (request):
     if dice >= 14:
         request.session['level']+=1
         request.session['gold']+=(dice-9)
-        return redirect ('/game')
-    else:
-        request.session['hp'] -= (20-dice)
-        if request.session['hp'] >= 0:
         if request.session['level']>6:
             return redirect ('/end')
         return redirect ('/game')
