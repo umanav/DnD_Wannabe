@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The game itself</title>
+    <title>Let's Play</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="jumbotron text-center">
@@ -56,19 +61,30 @@
                         <td>{{story.no_act}}</td>
                     </tr>
                     <tr>
-                        <td><a href="/first"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
+                        <td><a href="/first"><button class="btn btn-secondary btn-lg" >Roll the Dice</button></a></td>
                         <td><a href="/second"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
                         <td><a href="/third"><button class="btn btn-secondary btn-lg">Roll the Dice</button></a></td>
                     </tr>
-                    {% if messages %}
-                        {% for message in messages %}
-                            <script>
-                                alert('{{ message }}');
-                            </script>
-                        {% endfor %}
-                    {% endif %}
                 </tbody>
             </table>
+            {% if messages %}
+                <div class="bs-example">
+                    {% for message in messages %}
+                        {% if message.tags == 'info'%}
+                            <div class="alert alert-success">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>{{message}}</strong>
+                                </div>
+                        {% endif %}
+                        {% if message.tags == 'error'%}
+                                <div class="alert alert-danger">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>{{message}}</strong> 
+                                </div>
+                        {% endif %}    
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 </body>

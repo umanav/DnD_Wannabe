@@ -97,18 +97,21 @@ def first (request):
         dice +=4
         request.session["dice"]=dice
     if dice >= 14:
+        earned = dice-9
         request.session['level']+=1
-        request.session['gold']+=(dice-9)
+        request.session['gold']+=earned
         if request.session['level'] >6:
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
-        messages.info(request, 'You have reached the next level')
+        messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
         return redirect ('/game')
     else:
-        request.session['hp'] -= (20-dice)
+        life = 20-dice
+        request.session['hp'] -= life
         if request.session['hp'] <= 0:
             return redirect ('/game_over')
-        messages.info(request, 'You have rolled the number :{}'.format(dice))
+        messages.error(request, 'You have rolled the number :{}'.format(dice))
+        messages.error(request, 'You have lost {} hp'.format(life))
         return redirect ('/game')
 
 def second (request):
@@ -119,18 +122,21 @@ def second (request):
         dice +=4
         request.session["dice"]=dice
     if dice >= 14:
+        earned = dice-9
         request.session['level']+=1
-        request.session['gold']+=(dice-9)
+        request.session['gold']+=earned
         if request.session['level']>6:
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
-        messages.info(request, 'You have reached the next level')
+        messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
         return redirect ('/game')
     else:
-        request.session['hp'] -= (20-dice)
+        life = 20-dice
+        request.session['hp'] -= life
         if request.session['hp'] <= 0:
             return redirect ('/game_over')
-        messages.info(request, 'You have rolled the number :{}'.format(dice))    
+        messages.error(request, 'You have rolled the number :{}'.format(dice))    
+        messages.error(request, 'You have lost {} hp'.format(life))
         return redirect ('/game')
 
 def third (request):
@@ -138,16 +144,19 @@ def third (request):
     request.session["dice"]=dice
     game = Game.objects.get(user=request.session['id'])
     if dice >= 14:
+        earned = int(math.floor((dice-9)*1.5))
         request.session['level']+=1
-        request.session['gold'] = request.session['gold']+int(math.floor((dice-9)*1.5))
+        request.session['gold'] += earned
         if request.session['level']>6:
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
-        messages.info(request, 'You have reached the next level')
+        messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
         return redirect ('/game')
     else:
-        request.session['hp'] -= (20-dice)
+        life = 20-dice
+        request.session['hp'] -= life
         if request.session['hp'] <= 0:
             return redirect ('/game_over')
-        messages.info(request, 'You have rolled the number :{}'.format(dice))
+        messages.error(request, 'You have rolled the number :{}'.format(dice))
+        messages.error(request, 'You have lost {} hp'.format(life))
         return redirect ('/game')
