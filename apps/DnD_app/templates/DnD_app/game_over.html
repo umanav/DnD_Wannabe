@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-    <h1>Game Over</h1>
+    <img src="https://betanews.com/wp-content/uploads/2014/01/gravestone-e1445005263293.png" alt="">
+    <table>
+        <thead>
+            <th colspan="2">Your last attempt was futile, causing you to run out of HP</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="/restart"><button>New Game</button></a></td>
+                <td><a href="/logout"><button>Logout</button></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <h3></h3>
+
 </body>
 </html>
