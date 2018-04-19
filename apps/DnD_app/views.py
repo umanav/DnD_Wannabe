@@ -22,8 +22,8 @@ def register(request):
     return redirect("/")
 
 def profile(request):
-    user=User.objects.get(id=request.session['id'])
-    return render(request,'DnD_app/profile.html')
+    games = Game.objects.all()
+    return render(request,'DnD_app/profile.html', {'games':games})
 
 def login(request):
     errors = User.objects.valid_login(request.POST)

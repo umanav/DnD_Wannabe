@@ -40,6 +40,6 @@ ul{
     overflow: hidden;
 }
 
-.custom-button {
-
-  }
+#current_status{
+    margin-top: 20px;
+}

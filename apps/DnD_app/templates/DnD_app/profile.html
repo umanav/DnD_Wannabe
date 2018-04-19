@@ -16,6 +16,9 @@
                 <table class="table table-hover table-responsive-md table-fixed">
                     <thead class = "thead-dark">
                         <tr>
+                                <th colspan="3">Current Game</th>
+                        </tr>
+                        <tr>
                             <th>Player Gold </th>
                             <th>Player Level </th>
                             <th>Player HP </th>
@@ -31,10 +34,46 @@
                     </tbody>
                 </table>
                 <a href='/restart'><button class="btn btn-dark custom-button" type="button">Start a New Game</button> </a>
-                <a href='/game'><button class="btn btn-secondary btn-lg" type="button">Continue with Current Game</button> </a>
+                <a href='/game'><button class="btn btn-dark custom-button" type="button">Continue with Current Game</button> </a>
             {% else %}
+                <table class="table table-hover table-responsive-md table-fixed">
+                    <thead class = "thead-dark">
+                        <tr>
+                            <th>You have no Current Game</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Would you like to start a</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <a href="/character"><button class="btn btn-dark custom-button" type="button">New Game</button> </a>
             {% endif %}
+                <table class="table table-hover table-responsive-md table-fixed" id= "current_status">
+                    <thead class = "thead-dark">
+                        <tr>
+                                <th colspan="4">Other user's Current Games</th>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <th>Player Gold </th>
+                            <th>Player Level </th>
+                            <th>Player HP </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in games %}
+                        <tr>
+                            <td>{{ game.user.username }}</td>
+                            <td>{{ game.gold }}</td>
+                            <td>{{ game.level }}</td>
+                            <td>{{ game.hp }}</td>
+                            <!-- <td> Here it will show the levels passed. This is optional</td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 <a href='/logout'><button class="btn btn-dark custom-button"  type="button">Logout</button> </a>
             <hr>
             <img class="img-fluid" src="{% static 'DnD_app/images/DD.jpg' %}" alt="main"/>
