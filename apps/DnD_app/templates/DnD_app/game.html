@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
     <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="{% static 'DnD_app/css/additional.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
     <div>
@@ -16,7 +17,7 @@
         <p>Level : {{request.session.level}}</p>
         <p>HP : {{request.session.hp}}</p>
         <p>Strength: {{character.strength}}</p>
-        <a href="/save/{{character.id}}">Profile</a>
+        <a href="/save/{{character.id}}">Save</a>
         <a href="/logout">Logout</a>
     </div>
     <br>
@@ -34,6 +35,13 @@
                     <td><a href="/second"><button>Roll the Dice</button></a></td>
                     <td><a href="/third"><button>Roll the Dice</button></a></td>
                 </tr>
+                {% if messages %}
+                    {% for message in messages %}
+                        <script>
+                            alert('{{ message }}');
+                        </script>
+                    {% endfor %}
+                {% endif %}
              </tbody>
          </table>
     </div>
