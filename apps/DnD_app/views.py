@@ -99,11 +99,7 @@ def first (request):
     if dice >= 14:
         request.session['level']+=1
         request.session['gold']+=(dice-9)
-<<<<<<< HEAD
         if request.session['level'] >6:
-=======
-        if request.session['level']>6:
->>>>>>> 774e96bf3d315e74ef12593d291bf1f879920acd
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
         messages.info(request, 'You have reached the next level')

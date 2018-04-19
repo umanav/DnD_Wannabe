@@ -6,36 +6,38 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Player's Profile</title>
         {% load static %}
-        <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
-        <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
+        <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
     </head>
     <body>
-        <h1>Welcome, {{ request.session.user_name }}</h1>
-        {% if 'level' in request.session %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Player Gold </th>
-                        <th>Player Level </th>
-                        <th>Player HP </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{request.session.gold}}</td>
-                        <td>{{request.session.level}}</td>
-                        <td>{{request.session.hp}}</td>
-                        <!-- <td> Here it will show the levels passed. This is optional</td> -->
-                    </tr>
-                </tbody>
-            </table>
-            <a href='/restart'><button type="button">Start a New Game</button> </a>
-            <a href='/game'><button type="button">Continue with Current Game</button> </a>
-        {% else %}
-            <a href="/character"><button type="button">New Game</button> </a>
-        {% endif %}
-        <!-- When the user has registered, but hasn't played yet -->
-        <!-- For users that have played before -->
-        <a href='/logout'><button type="button">Logout</button> </a>
+        <div class="jumbotron text-center">
+            <h1>Welcome, {{ request.session.user_name }}</h1>
+            {% if 'level' in request.session %}
+                <table class="table table-hover table-responsive-md table-fixed">
+                    <thead class = "thead-dark">
+                        <tr>
+                            <th>Player Gold </th>
+                            <th>Player Level </th>
+                            <th>Player HP </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{request.session.gold}}</td>
+                            <td>{{request.session.level}}</td>
+                            <td>{{request.session.hp}}</td>
+                            <!-- <td> Here it will show the levels passed. This is optional</td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <a href='/restart'><button class="btn btn-dark custom-button" type="button">Start a New Game</button> </a>
+                <a href='/game'><button class="btn btn-secondary btn-lg" type="button">Continue with Current Game</button> </a>
+            {% else %}
+                <a href="/character"><button class="btn btn-dark custom-button" type="button">New Game</button> </a>
+            {% endif %}
+                <a href='/logout'><button class="btn btn-dark custom-button"  type="button">Logout</button> </a>
+            <hr>
+            <img class="img-fluid" src="{% static 'DnD_app/images/DD.jpg' %}" alt="main"/>
+        </div>
     </body>
 </html>

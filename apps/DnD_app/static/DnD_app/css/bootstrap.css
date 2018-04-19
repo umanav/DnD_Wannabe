@@ -8907,6 +8907,11 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important;
 }
 
+.table-fixed {
+  table-layout: fixed;
+  overflow: hidden;
+}
+
 @media print {
   *,
   *::before,
@@ -8972,4 +8977,5 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #ddd !important;
   }
 }
+
 /*# sourceMappingURL=bootstrap.css.map */
