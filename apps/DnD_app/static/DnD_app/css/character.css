@@ -1,0 +1,12 @@
+#wrapper{
+    padding: 20px;
+}
+.character{
+    display: inline-block;
+    margin: 20px;
+    border: 2px solid black;
+}
+.image{
+    width:200px;
+    height:300px;
+}

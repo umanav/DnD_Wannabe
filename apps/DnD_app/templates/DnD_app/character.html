@@ -6,41 +6,50 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Choose your character</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
-    <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}" media="screen" title="no title"  charset="utf-8">
+    <link rel="stylesheet" href="{% static 'DnD_app/css/character.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-    <h1>Choose your character, {{ request.session.user_name }}</h1>
-    <a href="/profile">Profile</a>
-    <a href="/logout">Logout</a>
-    <table>
+    <div id="wrapper" class="jumbotron text-center">
+        <div id="top">
+            <h1>Choose your character, {{ request.session.user_name }}</h1>
+            <a href="/profile"><button class="btn btn-dark">Profile</button></a>
+            <a href="/logout"><button class="btn btn-dark">Logout</button></a>
+        </div>
+        <hr>
         {% if characters %}
             {% for character in characters %}
-                <thead>
-                    <tr>
-                        <th>{{character.name}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="{% static character.image_route %}" alt="Character" style="width:200px;height:300px;"/></td>
-                    </tr>
-                    <tr>
-                        <td>HP : {{character.hp}}</td>
-                    </tr>
-                    <tr>   
-                        <td>Gold: {{character.gold}}</td>
-                    </tr>
-                    <tr>   
-                        <td>Strength: {{character.strength}}</td>
-                    </tr>
-                    <tr>
-                        <td><a href="/new_game/{{ character.id }}"><button>select</button></a></td>
-                    </tr>
-                </tbody>
+                <div class="character text-center">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{character.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><img src="{% static character.image_route %}" alt="Character" class="image"/></td>
+                            </tr>
+                            <tr>
+                                <td>Starting HP:</td>
+                                <td>{{character.hp}}</td>
+                            </tr>
+                            <tr>   
+                                <td>Starting Gold:</td>
+                                <td>{{character.gold}}</td>
+                            </tr>
+                            <tr>   
+                                <td colspan="2">Strength: {{character.strength}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a href="/new_game/{{ character.id }}"><button class="btn btn-secondary btn-lg">select</button></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             {% endfor %}
         {% endif %}
-    </table>
+    </div>
 </body>
 </html>
 
