@@ -10,58 +10,6 @@
     <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
 </head>
 <body>
-<<<<<<< HEAD
-    <div>
-        <h1>This is your Quest, {{ request.session.user_name }}</h1>
-        <table>
-            <thead>
-                <th colspan="3">Current Stats</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Gold</td>
-                    <td>HP</td>
-                    <td>Level</td>
-                </tr>
-                <tr>
-                    <td>{{request.session.gold}}</td>
-                    <td>{{request.session.hp}}</td>
-                    <td>{{request.session.level}}</td>
-                </tr>
-                <tr>
-                    <td colspan="3">Strength: {{character.strength}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <p></p>
-        <a href="/save/{{character.id}}">Profile</a>
-        <a href="/logout">Logout</a>
-    </div>
-    <br>
-    <div>
-         <p>{{story.story}}</p>
-         <table>
-             <tbody>
-                <tr>
-                     <td>{{story.ninja_pref}}</td>
-                     <td>{{story.monk_pref}}</td>
-                     <td>{{story.no_act}}</td>
-                </tr>
-                <tr>
-                    <td><a href="/first"><button>Roll the Dice</button></a></td>
-                    <td><a href="/second"><button>Roll the Dice</button></a></td>
-                    <td><a href="/third"><button>Roll the Dice</button></a></td>
-                </tr>
-                {% if messages %}
-                    {% for message in messages %}
-                        <script>
-                            alert('{{ message }}');
-                        </script>
-                    {% endfor %}
-                {% endif %}
-             </tbody>
-         </table>
-=======
     <div class="jumbotron text-center">
         <div>
             <h1>This is your Quest, {{ request.session.user_name }}</h1>
@@ -122,7 +70,6 @@
                 </tbody>
             </table>
         </div>
->>>>>>> 324184352e4a3ec75a4935fcbf1afc78e6712339
     </div>
 </body>
 </html>
