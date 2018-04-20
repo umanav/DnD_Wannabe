@@ -22,8 +22,9 @@ def register(request):
     return redirect("/")
 
 def profile(request):
-    games = Game.objects.all()
-    return render(request,'DnD_app/profile.html', {'games':games})
+    myGame = Game.objects.filter(user__id=request.session['id']) 
+    games = Game.objects.exclude(user__id=request.session['id'])
+    return render(request,'DnD_app/profile.html', {'games':games, 'myGame':myGame})
 
 def login(request):
     errors = User.objects.valid_login(request.POST)
@@ -37,6 +38,10 @@ def login(request):
         return redirect ('/profile')
 
 def logout(request):
+    if 'level' in request.session:
+        del request.session['gold']
+        del request.session['hp']
+        del request.session['level']
     del request.session['id']
     return redirect('/')
 
@@ -46,18 +51,13 @@ def character(request):
 
 def save(request,id):
     active = Game.objects.active_game(request.session['id'])
-    if active[0] == False:
-        user= User.objects.get(id=request.session['id'])
-        character= Character.objects.get(id=id)
-        game= Game.objects.create(user = user, hp = request.session['hp'], gold=request.session['gold'], level=request.session['level'], character=character)
-    else:
-        for active_game in active[1]: 
-            game = Game.objects.get(id=active_game.id)
-            game.character = Character.objects.get(id=id)
-            game.hp = request.session['hp']
-            game.gold = request.session['gold']
-            game.level = request.session['level']
-            game.save()
+    for active_game in active[1]: 
+        game = Game.objects.get(id=active_game.id)
+        game.character = Character.objects.get(id=id)
+        game.hp = request.session['hp']
+        game.gold = request.session['gold']
+        game.level = request.session['level']
+        game.save()
     return redirect('/profile')
 
 def restart(request):
@@ -74,6 +74,19 @@ def new_game(request, id):
     request.session['hp'] = character.hp
     request.session['gold'] = character.gold
     request.session['level'] = 1
+    active = Game.objects.active_game(request.session['id'])
+    if active[0] == False:
+        user= User.objects.get(id=request.session['id'])
+        character= Character.objects.get(id=id)
+        game= Game.objects.create(user = user, hp = request.session['hp'], gold=request.session['gold'], level=request.session['level'], character=character)
+    else:
+        for active_game in active[1]: 
+            game = Game.objects.get(id=active_game.id)
+            game.character = Character.objects.get(id=id)
+            game.hp = request.session['hp']
+            game.gold = request.session['gold']
+            game.level = request.session['level']
+            game.save()
     story = Story.objects.get(id=request.session['level'])
     return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
 
