@@ -22,7 +22,7 @@ def register(request):
     return redirect("/")
 
 def profile(request):
-    games = Game.objects.all()
+    games = Game.objects.exclude(user__id= request.session['id'])
     return render(request,'DnD_app/profile.html', {'games':games})
 
 def login(request):
