@@ -22,8 +22,10 @@ def register(request):
     return redirect("/")
 
 def profile(request):
-    games = Game.objects.exclude(user__id= request.session['id'])
-    return render(request,'DnD_app/profile.html', {'games':games})
+    myGame = Game.objects.filter(user__id=request.session['id']) 
+    games = Game.objects.exclude(user__id=request.session['id'])
+    print(myGame[0].gold)
+    return render(request,'DnD_app/profile.html', {'games':games, 'myGame':myGame})
 
 def login(request):
     errors = User.objects.valid_login(request.POST)
@@ -37,6 +39,10 @@ def login(request):
         return redirect ('/profile')
 
 def logout(request):
+    if 'level' in request.session:
+        del request.session['gold']
+        del request.session['hp']
+        del request.session['level']
     del request.session['id']
     return redirect('/')
 
@@ -45,6 +51,31 @@ def character(request):
     return render(request, "DnD_app/character.html",{'characters':characters})
 
 def save(request,id):
+    active = Game.objects.active_game(request.session['id'])
+    for active_game in active[1]: 
+        game = Game.objects.get(id=active_game.id)
+        game.character = Character.objects.get(id=id)
+        game.hp = request.session['hp']
+        game.gold = request.session['gold']
+        game.level = request.session['level']
+        game.save()
+    return redirect('/profile')
+
+def restart(request):
+    if 'level' in request.session:
+        del request.session['gold']
+        del request.session['hp']
+        del request.session['level']    
+    return redirect ('/character')
+
+def keep_playing(request):
+    return render(request, "DnD_app/game.html")
+
+def new_game(request, id):
+    character = Character.objects.get(id=id)
+    request.session['hp'] = character.hp
+    request.session['gold'] = character.gold
+    request.session['level'] = 1
     active = Game.objects.active_game(request.session['id'])
     if active[0] == False:
         user= User.objects.get(id=request.session['id'])
@@ -58,30 +89,17 @@ def save(request,id):
             game.gold = request.session['gold']
             game.level = request.session['level']
             game.save()
-    return redirect('/profile')
-
-def restart(request):
-    del request.session['gold']
-    del request.session['hp']
-    del request.session['level']
-    return redirect ('/profile')
-
-def keep_playing(request):
-    return render(request, "DnD_app/game.html")
-
-def new_game(request, id):
-    character = Character.objects.get(id=id)
-    request.session['hp'] = character.hp
-    request.session['gold'] = character.gold
-    request.session['level'] = 1
     story = Story.objects.get(id=request.session['level'])
     return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
 
 def game(request):
-    game = Game.objects.get(user=request.session['id'])
-    character= game.character
-    story = Story.objects.get(id=request.session['level'])
-    return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
+    if request.session['level'] < 7:
+        game = Game.objects.get(user=request.session['id'])
+        character= game.character
+        story = Story.objects.get(id=request.session['level'])
+        return render(request, "DnD_app/game.html", {'character':character, 'story' : story})
+    else:
+        return redirect ('/end')
 
 def end(request):
     return render(request, "DnD_app/end.html")
@@ -101,6 +119,14 @@ def first (request):
         request.session['level']+=1
         request.session['gold']+=earned
         if request.session['level'] >6:
+            active = Game.objects.active_game(request.session['id'])
+            for active_game in active[1]: 
+                game = Game.objects.get(id=active_game.id)
+                game.character = Character.objects.get(id=request.session['id'])
+                game.hp = request.session['hp']
+                game.gold = request.session['gold']
+                game.level = request.session['level']
+                game.save()
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
         messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
@@ -126,6 +152,14 @@ def second (request):
         request.session['level']+=1
         request.session['gold']+=earned
         if request.session['level']>6:
+            active = Game.objects.active_game(request.session['id'])
+            for active_game in active[1]: 
+                game = Game.objects.get(id=active_game.id)
+                game.character = Character.objects.get(id=request.session['id'])
+                game.hp = request.session['hp']
+                game.gold = request.session['gold']
+                game.level = request.session['level']
+                game.save()
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
         messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
@@ -148,6 +182,14 @@ def third (request):
         request.session['level']+=1
         request.session['gold'] += earned
         if request.session['level']>6:
+            active = Game.objects.active_game(request.session['id'])
+            for active_game in active[1]: 
+                game = Game.objects.get(id=active_game.id)
+                game.character = Character.objects.get(id=request.session['id'])
+                game.hp = request.session['hp']
+                game.gold = request.session['gold']
+                game.level = request.session['level']
+                game.save()
             return redirect ('/end')
         messages.info(request, 'You have rolled the number :{}'.format(dice))
         messages.info(request, 'You have earned {} gold and reached the next level'.format(earned))
