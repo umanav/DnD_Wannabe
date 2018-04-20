@@ -59,13 +59,14 @@ class UserManager (models.Manager):
             errors.append ("Your username should be at least 3 characters long")
         if len(password) == 0:
             errors.append ("Please enter your password")
-        try:
-            user = User.objects.get(username = username)
-            if bcrypt.checkpw ( password.encode(), user.password.encode() ):
-                return errors
-            errors.append ("Invalid username/password combination")
-        except User.DoesNotExist:
-            errors.append ("Invalid username/password combination")
+        else:
+            try:
+                user = User.objects.get(username = username)
+                if bcrypt.checkpw ( password.encode(), user.password.encode() ):
+                    return errors
+                errors.append ("Invalid username/password combination")
+            except User.DoesNotExist:
+                errors.append ("Invalid username/password combination")
         return errors
 
 class GameManager(models.Manager):
