@@ -24,6 +24,9 @@ def register(request):
 def profile(request):
     myGame = Game.objects.filter(user__id=request.session['id']) 
     games = Game.objects.exclude(user__id=request.session['id'])
+    request.session['hp'] = myGame[0].hp
+    request.session['gold'] = myGame[0].gold
+    request.session['level'] = myGame[0].level
     return render(request,'DnD_app/profile.html', {'games':games, 'myGame':myGame})
 
 def login(request):
@@ -121,7 +124,7 @@ def first (request):
             active = Game.objects.active_game(request.session['id'])
             for active_game in active[1]: 
                 game = Game.objects.get(id=active_game.id)
-                game.character = Character.objects.get(id=request.session['id'])
+                game.character = Character.objects.get(id=game.character.id)
                 game.hp = request.session['hp']
                 game.gold = request.session['gold']
                 game.level = request.session['level']
@@ -154,7 +157,7 @@ def second (request):
             active = Game.objects.active_game(request.session['id'])
             for active_game in active[1]: 
                 game = Game.objects.get(id=active_game.id)
-                game.character = Character.objects.get(id=request.session['id'])
+                game.character = Character.objects.get(id=game.character.id)
                 game.hp = request.session['hp']
                 game.gold = request.session['gold']
                 game.level = request.session['level']
@@ -184,7 +187,7 @@ def third (request):
             active = Game.objects.active_game(request.session['id'])
             for active_game in active[1]: 
                 game = Game.objects.get(id=active_game.id)
-                game.character = Character.objects.get(id=request.session['id'])
+                game.character = Character.objects.get(id=game.character.id)
                 game.hp = request.session['hp']
                 game.gold = request.session['gold']
                 game.level = request.session['level']

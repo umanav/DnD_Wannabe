@@ -9,8 +9,8 @@
         <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
     </head>
-    <body>
-        <div class="jumbotron text-center">
+    <body id="profile">
+        <div class= "text-center">
             <h1>Welcome, {{ request.session.user_name }}</h1>
             {% if myGame.0 or 'level' in request.session %}
                 <table class="table table-hover table-responsive-md table-fixed">
@@ -76,7 +76,7 @@
                 </table>
                 <a href='/logout'><button class="btn btn-dark custom-button"  type="button">Logout</button> </a>
             <hr>
-            <img class="img-fluid" src="{% static 'DnD_app/images/preparation.png' %}" alt="main"/>
+            <!-- <img class="img-fluid" src="{% static 'DnD_app/images/preparation.png' %}" alt="main"/> -->
         </div>
     </body>
 </html>

@@ -59,11 +59,21 @@ ul{
     text-align: left;
 }
 
-body {
+#index {
     background: #142F2A url('/static/DnD_app/images/index.jpg') no-repeat;
     /* background-size:contain; */
     background-position:center;
 }
-body h1{
+#index h1{
     padding: 25px;
+}
+#profile {
+    padding: 2% 8%;
+    color: white;
+    background: #0f0f0a url('/static/DnD_app/images/preparation.png') no-repeat;
+    background-position:center;
+    height: auto;
+}
+body{
+    height: auto;
 }
