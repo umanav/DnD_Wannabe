@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'DnD_app/css/normalize.css' %}" media="screen" title="no title"  charset="utf-8">
-    <link rel="stylesheet" href="{% static 'DnD_app/css/skeleton.css' %}" media="screen" title="no title"  charset="utf-8">
-</head>
-<body>
-        <img src="{% static 'DnD_app/images/game_over.png' %}" alt="Game Over"/>
-    <table>
-        <thead>
-            <th colspan="2">Your last attempt was futile, causing you to run out of HP</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td><a href="/profile"><button>Profile</button></a></td>
-                <td><a href="/restart"><button>New Game</button></a></td>
-                <td><a href="/logout"><button>Logout</button></a></td>
-            </tr>
-        </tbody>
-    </table>
-    <h3></h3>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'DnD_app/css/character.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <div id="wrapper" class="jumbotron text-center">
+            <img class="img-fluid character"  src="{% static 'DnD_app/images/game_over.png' %}" alt="Game Over"/>
+            <br>
+            <table class="table table-responsive-md table-fixed">
+                <thead>
+                    <th colspan="3"><h3>Your last attempt was futile!<br>You have run out of HP<br><br></h3><h4>Do you want to try again?</h4></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="/profile"><button class="btn btn-dark btn-md">Profile</button></a></td>
+                        <td><a href="/restart"><button class="btn btn-secondary btn-lg">New Game</button></a></td>
+                        <td><a href="/logout"><button class="btn btn-dark btn-md">Logout</button></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3></h3>
+        </div>
+    </body>
 </html>

@@ -10,18 +10,37 @@
     <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-    <img src="{% static 'DnD_app/images/Victory.jpg' %}" alt="Victory"/>
-    <table>
-        <thead>
-            <th colspan="2">
-                Congratulations! You have completed the game
-            </th>
-        </thead>
-        <tr>
-            <td><a href="/profile"><button>Profile</button></a></td>
-            <td><a href="/restart"><button>New Game</button></a></td>
-            <td><a href="/logout"><button>Logout</button></a></td>
-        </tr>
-    </table>    
+    <div class="jumbotron text-center">
+        <table class="table table-hover table-responsive-md table-fixed">
+            <thead class = "thead-dark">
+                <tr>
+                    <th colspan="2">You have finished the first chapter of your story.</th>
+                </tr>
+                <tr>
+                    <th>Player Gold </th>
+                    <th>Player HP </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{request.session.gold}}</td>
+                    <td>{{request.session.hp}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <img class="img-fluid" src="{% static 'DnD_app/images/Victory.jpg' %}" alt="Victory"/>
+        <table class="table table-responsive-md table-fixed">
+            <thead>
+                <th colspan="3">What would you like to do now?</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/profile"><button class="btn btn-dark btn-md">Profile</button></td>
+                    <td></a><a href="/restart"><button class="btn btn-secondary btn-lg">New Game</button></a></td>
+                    <td><a href="/logout"><button class="btn btn-dark btn-md">Logout</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
