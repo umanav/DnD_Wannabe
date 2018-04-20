@@ -7,7 +7,6 @@
     <title>Let's Play</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'DnD_app/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'DnD_app/css/styles.css' %}">
     <style type="text/css">
         .bs-example{
             margin: 20px;
@@ -46,9 +45,27 @@
                         </tr>
                     </tbody>
                 </table>
-
+                
             </div>
         </div>
+        {% if messages %}
+            <div class="bs-example">
+                {% for message in messages %}
+                    {% if message.tags == 'info'%}
+                        <div class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>{{message}}</strong>
+                            </div>
+                    {% endif %}
+                    {% if message.tags == 'error'%}
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>{{message}}</strong> 
+                            </div>
+                    {% endif %}    
+                {% endfor %}
+            </div>
+        {% endif %}
         <div id='story'>
             <table class="table table-responsive-md table-fixed">
                 <thead>
@@ -67,24 +84,6 @@
                     </tr>
                 </tbody>
             </table>
-            {% if messages %}
-                <div class="bs-example">
-                    {% for message in messages %}
-                        {% if message.tags == 'info'%}
-                            <div class="alert alert-success">
-                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                    <strong>{{message}}</strong>
-                                </div>
-                        {% endif %}
-                        {% if message.tags == 'error'%}
-                                <div class="alert alert-danger">
-                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                    <strong>{{message}}</strong> 
-                                </div>
-                        {% endif %}    
-                    {% endfor %}
-                </div>
-            {% endif %}
         </div>
     </div>
 </body>

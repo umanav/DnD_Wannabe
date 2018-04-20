@@ -43,3 +43,27 @@ ul{
 #current_status{
     margin-top: 20px;
 }
+
+.sign{
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    padding: 25px;
+    margin: 20px;
+    border: 1px solid rgb(151, 151, 151);
+    border-radius: 2.50rem !important;
+    background-color: rgba(156, 156, 156, 0.7);
+}
+.sign label{
+    font-weight: bold;
+    text-align: left;
+}
+
+body {
+    background: #142F2A url('/static/DnD_app/images/index.jpg') no-repeat;
+    /* background-size:contain; */
+    background-position:center;
+}
+body h1{
+    padding: 25px;
+}
