@@ -24,7 +24,6 @@ def register(request):
 def profile(request):
     myGame = Game.objects.filter(user__id=request.session['id']) 
     games = Game.objects.exclude(user__id=request.session['id'])
-    print(myGame[0].gold)
     return render(request,'DnD_app/profile.html', {'games':games, 'myGame':myGame})
 
 def login(request):
